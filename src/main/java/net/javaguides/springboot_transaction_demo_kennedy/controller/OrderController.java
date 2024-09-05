@@ -1,0 +1,28 @@
+package net.javaguides.springboot_transaction_demo_kennedy.controller;
+
+import net.javaguides.springboot_transaction_demo_kennedy.dto.OrderRequest;
+import net.javaguides.springboot_transaction_demo_kennedy.dto.OrderResponse;
+import net.javaguides.springboot_transaction_demo_kennedy.service.OrderService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("api/v1/orders")
+public class OrderController {
+
+    private OrderService orderService;
+
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @PostMapping
+    public ResponseEntity<OrderResponse> placeOrder(@RequestBody OrderRequest orderRequest){
+
+        return ResponseEntity.ok(orderService.placeOrder(orderRequest));
+
+    }
+}
